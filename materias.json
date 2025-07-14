@@ -2,67 +2,67 @@
   {
     "cuatrimestre": "1er Cuatrimestre",
     "materias": [
-      { "id": "alg", "nombre": "Álgebra", "correlativas": [] },
-      { "id": "adm", "nombre": "Principios de Administración", "correlativas": [] },
-      { "id": "psico", "nombre": "Psicología Social", "correlativas": [] },
-      { "id": "comu1", "nombre": "Teorías de la Comunicación", "correlativas": [] },
-      { "id": "ing1", "nombre": "Inglés Técnico", "correlativas": [] },
-      { "id": "mkt1", "nombre": "Marketing I", "correlativas": [] }
+      { "id": "alg", "nombre": "Álgebra", "correlativas": [], "promocional": true },
+      { "id": "adm", "nombre": "Principios de Administración", "correlativas": [], "promocional": true },
+      { "id": "psico", "nombre": "Psicología Social", "correlativas": [], "promocional": true },
+      { "id": "comu1", "nombre": "Teoría de la Comunicación", "correlativas": [], "promocional": false },
+      { "id": "ing1", "nombre": "Inglés Técnico", "correlativas": [], "promocional": true },
+      { "id": "mkt1", "nombre": "Marketing I", "correlativas": [], "promocional": false }
     ]
   },
   {
     "cuatrimestre": "2do Cuatrimestre",
     "materias": [
-      { "id": "estrat", "nombre": "Estrategias Digitales", "correlativas": [] },
-      { "id": "introPubli", "nombre": "Introducción a la Publicidad", "correlativas": [] },
-      { "id": "consumidor", "nombre": "Comportamiento del Consumidor", "correlativas": ["psico"] },
-      { "id": "microeco", "nombre": "Micro Economía", "correlativas": [] },
-      { "id": "ppp", "nombre": "Política de Productos y Precios", "correlativas": ["mkt1"] },
-      { "id": "briefing", "nombre": "Briefing y Redacción Publicitaria", "correlativas": [] }
+      { "id": "estrat", "nombre": "Estrategias Digitales", "correlativas": [], "promocional": true },
+      { "id": "introPubli", "nombre": "Introducción a la Publicidad", "correlativas": [], "promocional": false },
+      { "id": "consumidor", "nombre": "Comportamiento del Consumidor", "correlativas": ["psico"], "promocional": false },
+      { "id": "microeco", "nombre": "Microeconomía", "correlativas": [], "promocional": true },
+      { "id": "ppp", "nombre": "Política de Productos y Precios", "correlativas": ["mkt1"], "promocional": false },
+      { "id": "briefing", "nombre": "Briefing y Redacción Publicitaria", "correlativas": [], "promocional": true }
     ]
   },
   {
     "cuatrimestre": "3er Cuatrimestre",
     "materias": [
-      { "id": "estad", "nombre": "Estadísticas aplicadas a los negocios", "correlativas": ["alg"] },
-      { "id": "promo", "nombre": "Técnicas de Promoción y Ventas", "correlativas": ["mkt1"] },
-      { "id": "marcoeco", "nombre": "Marco Economía", "correlativas": ["microeco"] },
-      { "id": "estrategico", "nombre": "Marketing Estratégico", "correlativas": [] },
-      { "id": "financiera", "nombre": "Análisis Financiero", "correlativas": [] },
-      { "id": "internacional", "nombre": "Comercio y Negocios Internacionales", "correlativas": ["alg"] }
+      { "id": "estad", "nombre": "Estadísticas Aplicadas", "correlativas": ["alg"], "promocional": false },
+      { "id": "promo", "nombre": "Técnicas de Promoción y Ventas", "correlativas": ["mkt1"], "promocional": false },
+      { "id": "marcoeco", "nombre": "Marco Económico", "correlativas": ["microeco"], "promocional": true },
+      { "id": "estrategico", "nombre": "Marketing Estratégico", "correlativas": [], "promocional": false },
+      { "id": "financiera", "nombre": "Análisis Financiero", "correlativas": [], "promocional": true },
+      { "id": "internacional", "nombre": "Comercio y Negocios Internacionales", "correlativas": ["alg"], "promocional": true }
     ]
   },
   {
     "cuatrimestre": "4to Cuatrimestre",
     "materias": [
-      { "id": "integra", "nombre": "Comunicaciones Integradas de Marketing", "correlativas": ["comu1", "promo"] },
-      { "id": "ventas", "nombre": "Dirección de Ventas", "correlativas": ["promo"] },
-      { "id": "invmercado", "nombre": "Investigación de Mercados", "correlativas": ["estad"] },
-      { "id": "crea", "nombre": "Creatividad e Innovación", "correlativas": [] },
-      { "id": "rrpp", "nombre": "Relaciones Públicas", "correlativas": [] },
-      { "id": "herr", "nombre": "Herramientas Tecnológicas", "correlativas": [] }
+      { "id": "integra", "nombre": "Comunicaciones Integradas de Marketing", "correlativas": ["comu1", "promo"], "promocional": false },
+      { "id": "ventas", "nombre": "Dirección de Ventas", "correlativas": ["promo"], "promocional": false },
+      { "id": "invmercado", "nombre": "Investigación de Mercados", "correlativas": ["estad"], "promocional": true },
+      { "id": "crea", "nombre": "Creatividad e Innovación", "correlativas": [], "promocional": false },
+      { "id": "rrpp", "nombre": "Relaciones Públicas", "correlativas": [], "promocional": true },
+      { "id": "herr", "nombre": "Herramientas Tecnológicas", "correlativas": [], "promocional": true }
     ]
   },
   {
     "cuatrimestre": "5to Cuatrimestre",
     "materias": [
-      { "id": "taller", "nombre": "Taller Integrador de Marketing", "correlativas": ["integra"] },
-      { "id": "agencias", "nombre": "Agencias de Publicidad", "correlativas": ["introPubli"] },
-      { "id": "medios", "nombre": "Medios de Comunicación", "correlativas": ["integra"] },
-      { "id": "logistica", "nombre": "Canales de Distribución/Logística", "correlativas": ["integra"] },
-      { "id": "grafico", "nombre": "Principios de Diseño Gráfico", "correlativas": [] },
-      { "id": "branding", "nombre": "Diseño e Imagen de Marca - Branding", "correlativas": [] }
+      { "id": "taller", "nombre": "Taller Integrador de Marketing", "correlativas": ["integra"], "promocional": false },
+      { "id": "agencias", "nombre": "Agencias de Publicidad", "correlativas": ["introPubli"], "promocional": false },
+      { "id": "medios", "nombre": "Medios de Comunicación", "correlativas": ["integra"], "promocional": true },
+      { "id": "logistica", "nombre": "Canales de Distribución/Logística", "correlativas": ["integra"], "promocional": false },
+      { "id": "grafico", "nombre": "Principios de Diseño Gráfico", "correlativas": [], "promocional": true },
+      { "id": "branding", "nombre": "Diseño e Imagen de Marca", "correlativas": [], "promocional": true }
     ]
   },
   {
     "cuatrimestre": "6to Cuatrimestre",
     "materias": [
-      { "id": "publi", "nombre": "Estrategias Publicitarias", "correlativas": ["introPubli"] },
-      { "id": "etica", "nombre": "Ética y Deontología Profesional", "correlativas": [] },
-      { "id": "servicios", "nombre": "Marketing de Servicios", "correlativas": ["promo"] },
-      { "id": "decisiones", "nombre": "Decisiones de Marketing", "correlativas": ["integra"] },
-      { "id": "eval", "nombre": "Evaluación de Proyectos", "correlativas": ["estad", "alg"] },
-      { "id": "practica", "nombre": "Práctica Profesional", "correlativas": [] }
+      { "id": "publi", "nombre": "Estrategias Publicitarias", "correlativas": ["introPubli"], "promocional": false },
+      { "id": "etica", "nombre": "Ética y Deontología Profesional", "correlativas": [], "promocional": true },
+      { "id": "servicios", "nombre": "Marketing de Servicios", "correlativas": ["promo"], "promocional": true },
+      { "id": "decisiones", "nombre": "Decisiones de Marketing", "correlativas": ["integra"], "promocional": false },
+      { "id": "eval", "nombre": "Evaluación de Proyectos", "correlativas": ["estad", "alg"], "promocional": false },
+      { "id": "practica", "nombre": "Práctica Profesional", "correlativas": [], "promocional": false }
     ]
   }
 ]

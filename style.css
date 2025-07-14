@@ -1,12 +1,14 @@
 body {
-  font-family: sans-serif;
-  background-color: #f7f7f7;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffe6f0; /* fondo general rosado */
   padding: 20px;
+  margin: 0;
 }
 
 h1 {
   text-align: center;
-  color: #222;
+  color: #5a2a4d;
+  margin-bottom: 30px;
 }
 
 #malla-container {
@@ -17,47 +19,77 @@ h1 {
 }
 
 .cuatrimestre {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 15px;
+  background-color: #fff0f6;
+  border: 2px solid #f5d1e0;
+  padding: 20px;
   width: 250px;
-  border-radius: 10px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .cuatrimestre h2 {
   text-align: center;
   font-size: 1.1em;
-  margin-bottom: 10px;
-  color: #444;
+  margin-bottom: 15px;
+  color: #933d75;
+  border-bottom: 2px solid #f0bdd6;
+  padding-bottom: 5px;
 }
 
 .materia {
-  padding: 8px;
-  margin: 6px 0;
-  border-radius: 6px;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 10px;
   cursor: pointer;
-  transition: 0.2s;
-  background-color: #eee;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  font-weight: 500;
+  background-color: #fcd9e6; /* color base para materias regulares */
+  color: #3d2a2a;
+  border: 1px solid #f8b8d2;
 }
 
 .materia:hover {
-  background-color: #ddd;
+  transform: scale(1.03);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
+/* ✅ Materias aprobadas */
 .aprobada {
-  background-color: #8bc34a;
+  background-color: #a5d6a7 !important; /* verde suave */
   color: white;
+  border: none;
 }
 
+/* 🔒 Materias bloqueadas */
 .bloqueada {
-  background-color: #ccc;
+  background-color: #ddd !important;
+  color: #777;
   pointer-events: none;
-  color: #666;
+  opacity: 0.7;
 }
 
+/* ⭐ Materias promocionales */
+.promocional:not(.aprobada):not(.bloqueada) {
+  background-color: #ffd8b2 !important; /* color salmón claro */
+  border: 1px solid #ffc083;
+  color: #663c00;
+}
+
+/* 🎛 Botón de reset */
 button {
   display: block;
-  margin: 20px auto;
+  margin: 30px auto 10px;
   padding: 10px 20px;
   font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  background-color: #db6ea4;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #c85a91;
 }

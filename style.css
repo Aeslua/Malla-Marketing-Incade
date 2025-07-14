@@ -93,3 +93,31 @@ button {
 button:hover {
   background-color: #c85a91;
 }
+#progreso-container {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+#barra-progreso {
+  width: 100%;
+  background-color: #fcd9e6;
+  border: 2px solid #f5b2c6;
+  border-radius: 20px;
+  height: 25px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+#progreso-interno {
+  height: 100%;
+  background-color: #a5d6a7;
+  width: 0%;
+  transition: width 0.5s ease-in-out;
+}
+
+#progreso-texto {
+  margin-top: 5px;
+  color: #933d75;
+  font-weight: bold;
+}

@@ -5,6 +5,7 @@ async function cargarMaterias() {
   const res = await fetch("materias.json");
   materias = await res.json();
   renderMalla();
+  actualizarBarraProgreso();
 }
 
 function renderMalla() {
@@ -19,20 +20,33 @@ function renderMalla() {
     cuatri.materias.forEach(mat => {
       const m = document.createElement("div");
       m.classList.add("materia");
+
+      // ⭐ Si es promocional, se aplica clase especial
+      if (mat.promocional) {
+        m.classList.add("promocional");
+      }
+
       m.textContent = mat.nombre;
 
+      // ✅ Si está aprobada
       if (aprobadas.includes(mat.id)) {
         m.classList.add("aprobada");
-      } else if (!mat.correlativas.every(req => aprobadas.includes(req))) {
+      }
+      // 🔒 Si está bloqueada por correlativas
+      else if (!mat.correlativas.every(req => aprobadas.includes(req))) {
         m.classList.add("bloqueada");
       }
 
+      // Acciones al tocar
       m.onclick = () => toggleMateria(mat.id);
+
       div.appendChild(m);
     });
 
     container.appendChild(div);
   });
+
+  actualizarBarraProgreso(); // 🔄 Actualiza el progreso visual
 }
 
 function toggleMateria(id) {
@@ -43,6 +57,7 @@ function toggleMateria(id) {
   }
   localStorage.setItem("materiasAprobadas", JSON.stringify(aprobadas));
   renderMalla();
+  actualizarBarraProgreso();
 }
 
 function resetearProgreso() {
@@ -50,7 +65,18 @@ function resetearProgreso() {
     aprobadas = [];
     localStorage.removeItem("materiasAprobadas");
     renderMalla();
+    actualizarBarraProgreso();
   }
+}
+
+function actualizarBarraProgreso() {
+  const totalMaterias = materias.flatMap(c => c.materias).length;
+  const porcentaje = Math.round((aprobadas.length / totalMaterias) * 100);
+  const barra = document.getElementById("progreso-interno");
+  const texto = document.getElementById("progreso-texto");
+
+  barra.style.width = `${porcentaje}%`;
+  texto.textContent = `${porcentaje}% completado`;
 }
 
 cargarMaterias();

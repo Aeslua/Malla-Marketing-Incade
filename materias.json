@@ -5,8 +5,9 @@
       { "id": "alg", "nombre": "Álgebra", "correlativas": [] },
       { "id": "adm", "nombre": "Principios de Administración", "correlativas": [] },
       { "id": "psico", "nombre": "Psicología Social", "correlativas": [] },
-      { "id": "comu1", "nombre": "Teoría de la Comunicación", "correlativas": [] },
-      { "id": "ing1", "nombre": "Inglés Técnico", "correlativas": [] }
+      { "id": "comu1", "nombre": "Teorías de la Comunicación", "correlativas": [] },
+      { "id": "ing1", "nombre": "Inglés Técnico", "correlativas": [] },
+      { "id": "mkt1", "nombre": "Marketing I", "correlativas": [] }
     ]
   },
   {
@@ -15,17 +16,17 @@
       { "id": "estrat", "nombre": "Estrategias Digitales", "correlativas": [] },
       { "id": "introPubli", "nombre": "Introducción a la Publicidad", "correlativas": [] },
       { "id": "consumidor", "nombre": "Comportamiento del Consumidor", "correlativas": ["psico"] },
-      { "id": "microeco", "nombre": "Microeconomía", "correlativas": [] },
-      { "id": "ppp", "nombre": "Política de Productos y Precios", "correlativas": ["adm"] },
+      { "id": "microeco", "nombre": "Micro Economía", "correlativas": [] },
+      { "id": "ppp", "nombre": "Política de Productos y Precios", "correlativas": ["mkt1"] },
       { "id": "briefing", "nombre": "Briefing y Redacción Publicitaria", "correlativas": [] }
     ]
   },
   {
     "cuatrimestre": "3er Cuatrimestre",
     "materias": [
-      { "id": "estad", "nombre": "Estadísticas Aplicadas", "correlativas": ["alg"] },
-      { "id": "promo", "nombre": "Técnicas de Promoción y Ventas", "correlativas": ["ppp"] },
-      { "id": "marcoeco", "nombre": "Marco Económico", "correlativas": ["microeco"] },
+      { "id": "estad", "nombre": "Estadísticas aplicadas a los negocios", "correlativas": ["alg"] },
+      { "id": "promo", "nombre": "Técnicas de Promoción y Ventas", "correlativas": ["mkt1"] },
+      { "id": "marcoeco", "nombre": "Marco Economía", "correlativas": ["microeco"] },
       { "id": "estrategico", "nombre": "Marketing Estratégico", "correlativas": [] },
       { "id": "financiera", "nombre": "Análisis Financiero", "correlativas": [] },
       { "id": "internacional", "nombre": "Comercio y Negocios Internacionales", "correlativas": ["alg"] }
@@ -50,7 +51,7 @@
       { "id": "medios", "nombre": "Medios de Comunicación", "correlativas": ["integra"] },
       { "id": "logistica", "nombre": "Canales de Distribución/Logística", "correlativas": ["integra"] },
       { "id": "grafico", "nombre": "Principios de Diseño Gráfico", "correlativas": [] },
-      { "id": "branding", "nombre": "Diseño e Imagen de Marca", "correlativas": [] }
+      { "id": "branding", "nombre": "Diseño e Imagen de Marca - Branding", "correlativas": [] }
     ]
   },
   {

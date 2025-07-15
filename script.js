@@ -150,3 +150,9 @@ function manejarCorrelativas() {
       }
     });
 }
+function resetearProgreso() {
+  if (confirm("¿Estás segura de que querés reiniciar tu progreso?")) {
+    localStorage.removeItem("estados");
+    renderizarMalla(); // Vuelve a dibujar todo desde cero
+  }
+}

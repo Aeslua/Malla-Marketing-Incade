@@ -127,16 +127,16 @@ button:hover {
 .progreso-wrapper {
   display: flex;
   justify-content: center;
-  align-items: baseline;  /* CAMBIO CLAVE: Alinea los textos por la línea base */
-  gap: 8px;
   margin-top: 10px;
   margin-bottom: 5px;
 }
 
-.progreso-label,
-#progreso-texto {
-  font-weight: bold;
+.progreso-text-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 14px;
+  font-weight: bold;
   color: #b94782;
   line-height: 1;
 }

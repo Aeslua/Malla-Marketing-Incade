@@ -16,9 +16,9 @@ function renderizarMalla() {
 
   Object.entries(materias).forEach(([cuatrimestre, lista]) => {
     const columna = document.createElement("div");
-    columna.className = "columna";
+    columna.className = "cuatrimestre";
 
-    const titulo = document.createElement("h3");
+    const titulo = document.createElement("h2");
     titulo.textContent = cuatrimestre;
     columna.appendChild(titulo);
 
@@ -30,8 +30,11 @@ function renderizarMalla() {
       boton.dataset.estado = "pendiente";
       boton.dataset.nombre = materia.nombre;
 
+      // Asignar clase según sea promocional o regular
       if (materia.promocional) {
         boton.classList.add("promocional");
+      } else {
+        boton.classList.add("regular");
       }
 
       boton.addEventListener("click", () => cambiarEstado(boton, materia));
@@ -49,14 +52,24 @@ function renderizarMalla() {
 function cambiarEstado(boton, materia) {
   const estado = boton.dataset.estado;
 
+  // Remover todas las clases de estado antes de asignar la nueva
+  boton.classList.remove("regular", "promocional", "cursada", "aprobada");
+
   if (estado === "pendiente") {
     boton.dataset.estado = "cursada";
+    boton.classList.add("cursada");
     boton.innerHTML = `⏺️ ${materia.nombre}`;
   } else if (estado === "cursada") {
     boton.dataset.estado = "aprobada";
+    boton.classList.add("aprobada");
     boton.innerHTML = `✅ ${materia.nombre}`;
   } else {
     boton.dataset.estado = "pendiente";
+    if (materia.promocional) {
+      boton.classList.add("promocional");
+    } else {
+      boton.classList.add("regular");
+    }
     boton.innerHTML = materia.nombre;
   }
 
@@ -76,12 +89,24 @@ function actualizarEstadosGuardados() {
   document.querySelectorAll(".materia").forEach((boton) => {
     const estado = estados[boton.dataset.codigo];
     if (estado) {
+      // Remover todas las clases de estado antes de asignar la guardada
+      boton.classList.remove("regular", "promocional", "cursada", "aprobada");
+
       boton.dataset.estado = estado;
 
       if (estado === "cursada") {
+        boton.classList.add("cursada");
         boton.innerHTML = `⏺️ ${boton.dataset.nombre}`;
       } else if (estado === "aprobada") {
+        boton.classList.add("aprobada");
         boton.innerHTML = `✅ ${boton.dataset.nombre}`;
+      } else {
+        if (boton.classList.contains("promocional") || boton.dataset.promocional === "true") {
+          boton.classList.add("promocional");
+        } else {
+          boton.classList.add("regular");
+        }
+        boton.innerHTML = boton.dataset.nombre;
       }
     }
   });

@@ -126,21 +126,21 @@ button:hover {
 
 .progreso-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 10px;
   margin-bottom: 5px;
 }
 
-.progreso-text-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
+.progreso-label {
   font-weight: bold;
+  font-size: 14px;
   color: #b94782;
-  line-height: 1;
+  margin-bottom: 4px;
 }
 
-.progreso-text-group {
-  font-family: 'Segoe UI', sans-serif;
+#progreso-texto {
+  font-weight: bold;
+  font-size: 14px;
+  color: #b94782;
 }

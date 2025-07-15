@@ -123,3 +123,19 @@ button {
 button:hover {
   background-color: #d96dac;
 }
+
+.progreso-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.progreso-label,
+#progreso-texto {
+  font-weight: bold;
+  font-size: 14px;
+  color: #b94782;
+}

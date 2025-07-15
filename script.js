@@ -1,111 +1,99 @@
-let materias = [];
-let estadoMaterias = {};
-let materiasBloqueadas = {};
-let totalMaterias = 0;
+let materias;
+let estadoMaterias = JSON.parse(localStorage.getItem("estadoMaterias") || "{}");
 
 async function cargarMaterias() {
-  const response = await fetch('materias.json');
-  materias = await response.json();
-  totalMaterias = materias.length;
+  const res = await fetch("materias.json");
+  materias = await res.json();
+  renderMalla();
+  actualizarBarraProgreso();
+}
 
-  materias.forEach((materia, index) => {
-    const card = document.createElement('div');
-    card.className = 'materia-card';
-    card.textContent = materia.nombre;
+function renderMalla() {
+  const container = document.getElementById("malla-container");
+  container.innerHTML = "";
 
-    // Color base
-    card.classList.add(materia.promocional ? 'promocional' : 'regular');
+  materias.forEach(cuatri => {
+    const div = document.createElement("div");
+    div.classList.add("cuatrimestre");
+    div.innerHTML = `<h2>${cuatri.cuatrimestre}</h2>`;
 
-    // Estado inicial
-    estadoMaterias[materia.nombre] = 'inicial';
-    materiasBloqueadas[materia.nombre] = verificarBloqueada(materia);
+    cuatri.materias.forEach(mat => {
+      const estado = estadoMaterias[mat.id] || "ninguno";
+      const m = document.createElement("div");
+      m.classList.add("materia");
 
-    if (materiasBloqueadas[materia.nombre]) {
-      card.classList.add('bloqueada');
-    }
+      // Aplica clase de estado
+      if (estado === "cursada") m.classList.add("cursada");
+      else if (estado === "aprobada") m.classList.add("aprobada");
 
-    card.addEventListener('click', () => {
-      if (materiasBloqueadas[materia.nombre]) return;
-
-      // Estado: inicial → cursada → aprobada → inicial
-      const estado = estadoMaterias[materia.nombre];
-      if (estado === 'inicial') {
-        estadoMaterias[materia.nombre] = 'cursada';
-        card.classList.add('cursada');
-        card.innerHTML = '⏺️ ' + materia.nombre;
-      } else if (estado === 'cursada') {
-        estadoMaterias[materia.nombre] = 'aprobada';
-        card.classList.remove('cursada');
-        card.classList.add('aprobada');
-        card.innerHTML = '✅ ' + materia.nombre;
-      } else {
-        estadoMaterias[materia.nombre] = 'inicial';
-        card.classList.remove('cursada', 'aprobada');
-        card.innerHTML = materia.nombre;
+      // Bloquea si no tiene correlativas aprobadas y aún no se cursó
+      if (
+        estado === "ninguno" &&
+        !mat.correlativas.every(req => estadoMaterias[req] === "aprobada")
+      ) {
+        m.classList.add("bloqueada");
       }
 
-      actualizarDesbloqueos();
-      actualizarProgreso();
+      // Define color base solo para estado inicial
+      if (estado === "ninguno") {
+        if (mat.promocional) {
+          m.classList.add("promocional");
+        } else {
+          m.classList.add("regular");
+        }
+      }
+
+      // Íconos según estado
+      let icono = "";
+      if (estado === "cursada") icono = " ⏺️";
+      else if (estado === "aprobada") icono = " ✅";
+
+      m.textContent = mat.nombre + icono;
+
+      m.onclick = () => cambiarEstado(mat.id, mat.correlativas);
+      div.appendChild(m);
     });
 
-    const container = document.getElementById(`cuatrimestre-${materia.cuatrimestre}`);
-    container.appendChild(card);
+    container.appendChild(div);
   });
 
-  actualizarProgreso();
+  actualizarBarraProgreso();
 }
 
-function verificarBloqueada(materia) {
-  if (!materia.correlativas) return false;
+function cambiarEstado(id, correlativas) {
+  let estado = estadoMaterias[id] || "ninguno";
 
-  const { cursadas, aprobadas } = materia.correlativas;
-  const todasCursadas = cursadas?.every(
-    nombre => estadoMaterias[nombre] === 'cursada' || estadoMaterias[nombre] === 'aprobada'
-  );
-  const todasAprobadas = aprobadas?.every(
-    nombre => estadoMaterias[nombre] === 'aprobada'
-  );
+  if (estado === "ninguno") {
+    const puedeCursar = correlativas.every(req => estadoMaterias[req] === "aprobada");
+    if (!puedeCursar) return;
+    estadoMaterias[id] = "cursada";
+  } else if (estado === "cursada") {
+    estadoMaterias[id] = "aprobada";
+  } else {
+    delete estadoMaterias[id]; // vuelve a inicio
+  }
 
-  return !(todasCursadas ?? true) || !(todasAprobadas ?? true);
-}
-
-function actualizarDesbloqueos() {
-  materias.forEach(materia => {
-    const card = [...document.querySelectorAll('.materia-card')]
-      .find(el => el.textContent.includes(materia.nombre));
-
-    const bloqueadaAntes = materiasBloqueadas[materia.nombre];
-    materiasBloqueadas[materia.nombre] = verificarBloqueada(materia);
-
-    if (materiasBloqueadas[materia.nombre]) {
-      card.classList.add('bloqueada');
-    } else {
-      card.classList.remove('bloqueada');
-    }
-  });
-}
-
-function actualizarProgreso() {
-  const aprobadas = Object.values(estadoMaterias).filter(estado => estado === 'aprobada').length;
-  const porcentaje = Math.round((aprobadas / totalMaterias) * 100);
-  document.getElementById('progreso-barra').style.width = `${porcentaje}%`;
-  document.getElementById('progreso-texto').textContent = `${porcentaje}% completado`;
+  localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));
+  renderMalla();
 }
 
 function resetearProgreso() {
-  estadoMaterias = {};
-  document.querySelectorAll('.materia-card').forEach(card => {
-    card.classList.remove('cursada', 'aprobada', 'bloqueada');
-    const nombre = card.textContent.replace('⏺️ ', '').replace('✅ ', '');
-    const materia = materias.find(m => m.nombre === nombre);
-    card.textContent = materia.nombre;
-    card.classList.add(materia.promocional ? 'promocional' : 'regular');
-    estadoMaterias[nombre] = 'inicial';
-  });
-  actualizarDesbloqueos();
-  actualizarProgreso();
+  if (confirm("¿Seguro que querés borrar tu progreso?")) {
+    estadoMaterias = {};
+    localStorage.removeItem("estadoMaterias");
+    renderMalla();
+  }
 }
 
-document.getElementById('resetear').addEventListener('click', resetearProgreso);
+function actualizarBarraProgreso() {
+  const total = materias.flatMap(c => c.materias).length;
+  const completadas = Object.values(estadoMaterias).filter(e => e === "aprobada").length;
+  const porcentaje = Math.round((completadas / total) * 100);
+  const barra = document.getElementById("progreso-interno");
+  const texto = document.getElementById("progreso-texto");
+
+  barra.style.width = `${porcentaje}%`;
+  texto.textContent = `${porcentaje}% completado`;
+}
 
 cargarMaterias();

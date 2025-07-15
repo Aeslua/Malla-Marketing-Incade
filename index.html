@@ -1,21 +1,246 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Malla Curricular - Marketing INCADE</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Malla Curricular Interactiva - Tecnicatura Marketing</title>
+<style>
+  /* Fondo general rosado */
+  body {
+    background-color: #f9d6e3;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #9b2a4b;
+  }
+  .container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cuatrimestre {
+    background: #fce9f1;
+    border-radius: 8px;
+    padding: 10px;
+    width: 220px;
+    box-shadow: 0 0 6px #d3a7bb;
+  }
+  .cuatrimestre h2 {
+    color: #8b1e3f;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .materia {
+    cursor: pointer;
+    margin: 6px 0;
+    padding: 6px 8px;
+    border-radius: 5px;
+    user-select: none;
+    transition: background-color 0.3s;
+    color: #3a1a29;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Base: materias regulares rosado pastel más claro */
+  .materia.regular {
+    background-color: #f7d8e3;
+  }
+  /* Base: materias promocionales naranja */
+  .materia.promocional {
+    background-color: #f4a261;
+    color: #582b0e;
+  }
+
+  /* Estados */
+  /* Cursada (regular o promocional) - amarillo */
+  .materia.cursada {
+    background-color: #f9e79f !important;
+    color: #6b5500 !important;
+  }
+  /* Aprobada (regular o promocional) - verde */
+  .materia.aprobada {
+    background-color: #a9dfbf !important;
+    color: #256029 !important;
+  }
+
+  /* Íconos al lado del nombre */
+  .icono-estado {
+    margin-left: 8px;
+    font-weight: bold;
+  }
+
+  /* Barra progreso general */
+  #barra-progreso-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto 40px auto;
+    background-color: #ffd9e3;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 0 5px #bb7799;
+  }
+  #barra-progreso {
+    height: 20px;
+    width: 0;
+    background-color: #4caf50;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+  }
+  #progreso-text {
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 600;
+    color: #68283c;
+  }
+</style>
 </head>
 <body>
-  <h1>Tecnicatura en Marketing y Publicidad Digital</h1>
-  <div id="progreso-container">
-  <label for="barra-progreso">Progreso general:</label>
-  <div id="barra-progreso">
-    <div id="progreso-interno"></div>
+
+<h1>Malla Curricular Tecnicatura en Marketing y Publicidad Digital</h1>
+
+<div id="barra-progreso-container">
+  <div id="barra-progreso"></div>
+</div>
+<div id="progreso-text">Progreso: 0%</div>
+
+<div class="container" id="malla-container">
+
+  <!-- 1er Cuatrimestre -->
+  <div class="cuatrimestre" data-cuatrimestre="1">
+    <h2>1er Cuatrimestre</h2>
+    <div class="materia promocional" data-nombre="Álgebra">Álgebra <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Principios de Administración">Principios de Administración <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Psicología Social">Psicología Social <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Inglés Técnico">Inglés Técnico <span class="icono-estado"></span></div>
+    <!-- Agregar otras materias regulares del 1er cuatri -->
+    <div class="materia regular" data-nombre="Otra Materia 1">Otra Materia 1 <span class="icono-estado"></span></div>
+    <div class="materia regular" data-nombre="Otra Materia 2">Otra Materia 2 <span class="icono-estado"></span></div>
   </div>
-  <div id="progreso-texto">0% completado</div>
+
+  <!-- 2do Cuatrimestre -->
+  <div class="cuatrimestre" data-cuatrimestre="2">
+    <h2>2do Cuatrimestre</h2>
+    <div class="materia promocional" data-nombre="Estrategias Digitales">Estrategias Digitales <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Microeconomía">Microeconomía <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Briefing y Redacción Publicitaria">Briefing y Redacción Publicitaria <span class="icono-estado"></span></div>
+    <!-- Agregar otras materias regulares del 2do cuatri -->
+    <div class="materia regular" data-nombre="Otra Materia 3">Otra Materia 3 <span class="icono-estado"></span></div>
   </div>
-  <div id="malla-container"></div>
-  <button onclick="resetearProgreso()">🔄 Resetear progreso</button>
-  <script src="script.js"></script>
+
+  <!-- 3er Cuatrimestre -->
+  <div class="cuatrimestre" data-cuatrimestre="3">
+    <h2>3er Cuatrimestre</h2>
+    <div class="materia promocional" data-nombre="Marco Económico">Marco Económico <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Análisis Financiero">Análisis Financiero <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Comercio y Negocios Internacionales">Comercio y Negocios Internacionales <span class="icono-estado"></span></div>
+    <!-- Agregar otras materias regulares del 3er cuatri -->
+  </div>
+
+  <!-- 4to Cuatrimestre -->
+  <div class="cuatrimestre" data-cuatrimestre="4">
+    <h2>4to Cuatrimestre</h2>
+    <div class="materia promocional" data-nombre="Investigación de Mercados">Investigación de Mercados <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Relaciones Públicas">Relaciones Públicas <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Herramientas Tecnológicas">Herramientas Tecnológicas <span class="icono-estado"></span></div>
+    <!-- Agregar otras materias regulares del 4to cuatri -->
+  </div>
+
+  <!-- 5to Cuatrimestre -->
+  <div class="cuatrimestre" data-cuatrimestre="5">
+    <h2>5to Cuatrimestre</h2>
+    <div class="materia promocional" data-nombre="Medios de Comunicación">Medios de Comunicación <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Principios de Diseño Gráfico">Principios de Diseño Gráfico <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Diseño e Imagen de Marca (Branding)">Diseño e Imagen de Marca (Branding) <span class="icono-estado"></span></div>
+    <!-- Agregar otras materias regulares del 5to cuatri -->
+  </div>
+
+  <!-- 6to Cuatrimestre -->
+  <div class="cuatrimestre" data-cuatrimestre="6">
+    <h2>6to Cuatrimestre</h2>
+    <div class="materia promocional" data-nombre="Ética y Deontología Profesional">Ética y Deontología Profesional <span class="icono-estado"></span></div>
+    <div class="materia promocional" data-nombre="Marketing de Servicios">Marketing de Servicios <span class="icono-estado"></span></div>
+    <!-- Agregar otras materias regulares del 6to cuatri -->
+  </div>
+
+</div>
+
+<script>
+  // Guardar estado en localStorage para persistir entre sesiones
+  const STORAGE_KEY = 'malla-estados';
+
+  // Cargar estados guardados o iniciar vacío
+  let estadosGuardados = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
+  const materias = document.querySelectorAll('.materia');
+
+  // Aplicar estados guardados al cargar la página
+  materias.forEach(materia => {
+    const nombre = materia.dataset.nombre;
+    const estado = estadosGuardados[nombre];
+    if (estado === 'cursada') {
+      materia.classList.add('cursada');
+      materia.classList.remove('aprobada');
+      materia.querySelector('.icono-estado').textContent = '⏺️';
+    } else if (estado === 'aprobada') {
+      materia.classList.add('aprobada');
+      materia.classList.remove('cursada');
+      materia.querySelector('.icono-estado').textContent = '✅';
+    } else {
+      materia.classList.remove('cursada', 'aprobada');
+      materia.querySelector('.icono-estado').textContent = '';
+    }
+  });
+
+  function actualizarProgreso() {
+    const total = materias.length;
+    let aprobadas = 0;
+    materias.forEach(materia => {
+      if (materia.classList.contains('aprobada')) aprobadas++;
+    });
+    const porcentaje = total ? Math.round((aprobadas / total) * 100) : 0;
+    document.getElementById('barra-progreso').style.width = porcentaje + '%';
+    document.getElementById('progreso-text').textContent = `Progreso: ${porcentaje}%`;
+  }
+
+  materias.forEach(materia => {
+    materia.addEventListener('click', () => {
+      // Estados:
+      // Sin estado -> cursada (amarillo)
+      // cursada -> aprobada (verde)
+      // aprobada -> sin estado (normal base)
+
+      if (materia.classList.contains('aprobada')) {
+        materia.classList.remove('aprobada', 'cursada');
+        materia.querySelector('.icono-estado').textContent = '';
+        estadosGuardados[materia.dataset.nombre] = null;
+      } else if (materia.classList.contains('cursada')) {
+        materia.classList.remove('cursada');
+        materia.classList.add('aprobada');
+        materia.querySelector('.icono-estado').textContent = '✅';
+        estadosGuardados[materia.dataset.nombre] = 'aprobada';
+      } else {
+        materia.classList.add('cursada');
+        materia.querySelector('.icono-estado').textContent = '⏺️';
+        estadosGuardados[materia.dataset.nombre] = 'cursada';
+      }
+      // Limpiar estados nulos
+      if (estadosGuardados[materia.dataset.nombre] === null) {
+        delete estadosGuardados[materia.dataset.nombre];
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(estadosGuardados));
+      actualizarProgreso();
+    });
+  });
+
+  actualizarProgreso();
+</script>
+
 </body>
 </html>

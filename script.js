@@ -1,5 +1,6 @@
-const contenedor = document.getElementById("contenedor");
-const progreso = document.getElementById("progreso");
+const contenedor = document.getElementById("malla-container");
+const progreso = document.getElementById("progreso-interno");
+const progresoTexto = document.getElementById("progreso-texto");
 let materias = {};
 
 fetch("materias.json")
@@ -7,7 +8,8 @@ fetch("materias.json")
   .then((data) => {
     materias = data;
     renderizarMalla();
-  });
+  })
+  .catch((err) => console.error("Error cargando materias.json:", err));
 
 function renderizarMalla() {
   contenedor.innerHTML = "";
@@ -26,6 +28,7 @@ function renderizarMalla() {
       boton.textContent = materia.nombre;
       boton.dataset.codigo = materia.codigo;
       boton.dataset.estado = "pendiente";
+      boton.dataset.nombre = materia.nombre;
 
       if (materia.promocional) {
         boton.classList.add("promocional");
@@ -76,9 +79,9 @@ function actualizarEstadosGuardados() {
       boton.dataset.estado = estado;
 
       if (estado === "cursada") {
-        boton.innerHTML = `⏺️ ${boton.textContent}`;
+        boton.innerHTML = `⏺️ ${boton.dataset.nombre}`;
       } else if (estado === "aprobada") {
-        boton.innerHTML = `✅ ${boton.textContent.replace("⏺️ ", "")}`;
+        boton.innerHTML = `✅ ${boton.dataset.nombre}`;
       }
     }
   });
@@ -87,10 +90,12 @@ function actualizarEstadosGuardados() {
 function actualizarProgreso() {
   const botones = document.querySelectorAll(".materia");
   const total = botones.length;
-  const aprobadas = Array.from(botones).filter(b => b.dataset.estado === "aprobada").length;
+  const aprobadas = Array.from(botones).filter(
+    (b) => b.dataset.estado === "aprobada"
+  ).length;
   const porcentaje = Math.round((aprobadas / total) * 100);
   progreso.style.width = `${porcentaje}%`;
-  progreso.textContent = `${porcentaje}% completado`;
+  progresoTexto.textContent = `${porcentaje}% completado`;
 }
 
 function manejarCorrelativas() {
@@ -100,19 +105,23 @@ function manejarCorrelativas() {
     boton.classList.remove("bloqueada");
   });
 
-  Object.values(materias).flat().forEach((materia) => {
-    const boton = document.querySelector(`.materia[data-codigo='${materia.codigo}']`);
+  Object.values(materias)
+    .flat()
+    .forEach((materia) => {
+      const boton = document.querySelector(`.materia[data-codigo='${materia.codigo}']`);
 
-    if (materia.correlativas) {
-      const { regular = [], aprobado = [] } = materia.correlativas;
+      if (materia.correlativas) {
+        const { regular = [], aprobado = [] } = materia.correlativas;
 
-      const faltanRegular = regular.some((cod) => estados[cod] !== "cursada" && estados[cod] !== "aprobada");
-      const faltanAprobado = aprobado.some((cod) => estados[cod] !== "aprobada");
+        const faltanRegular = regular.some(
+          (cod) => estados[cod] !== "cursada" && estados[cod] !== "aprobada"
+        );
+        const faltanAprobado = aprobado.some((cod) => estados[cod] !== "aprobada");
 
-      if (faltanRegular || faltanAprobado) {
-        boton.disabled = true;
-        boton.classList.add("bloqueada");
+        if (faltanRegular || faltanAprobado) {
+          boton.disabled = true;
+          boton.classList.add("bloqueada");
+        }
       }
-    }
-  });
+    });
 }

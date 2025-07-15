@@ -1,6 +1,6 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #ffe6f0; /* fondo rosado */
+  background-color: #ffe6f0; /* fondo general rosado */
   margin: 0;
   padding: 20px;
   color: #333;
@@ -20,7 +20,7 @@ h1 {
 }
 
 .cuatrimestre {
-  background-color: #ffebf5; /* rosado pastel claro */
+  background-color: #ffebf5; /* tarjeta pastel */
   padding: 15px;
   border-radius: 12px;
   width: 220px;
@@ -36,7 +36,7 @@ h1 {
 }
 
 .materia {
-  background-color: #fcd6e2; /* regular: rosado suave */
+  background-color: #fcd6e2; /* color base para materias regulares */
   margin: 6px 0;
   padding: 8px;
   border-radius: 6px;
@@ -48,24 +48,30 @@ h1 {
   transform: scale(1.03);
 }
 
+/* Mantiene siempre el color naranja en promocionales */
 .promocional {
-  background-color: #ffc78e !important; /* naranja pastel */
+  background-color: #ffc78e !important;
+  color: #000 !important;
 }
 
-.cursada {
-  background-color: #ffe066 !important; /* amarillo pastel */
+/* Estado 1: Cursada (solo regulares) */
+.cursada:not(.promocional) {
+  background-color: #fff1a3 !important; /* amarillo suave */
 }
 
-.aprobada {
-  background-color: #b3f3b3 !important; /* verde suave */
+/* Estado 2: Aprobada (solo regulares) */
+.aprobada:not(.promocional) {
+  background-color: #b3f3b3 !important; /* verde pastel */
 }
 
+/* Materia bloqueada por correlativas */
 .bloqueada {
   background-color: #e0e0e0 !important;
   color: #aaa !important;
   pointer-events: none;
 }
 
+/* Barra de progreso */
 #barra-progreso {
   margin: 20px auto;
   width: 60%;
@@ -89,6 +95,7 @@ h1 {
   color: #b94782;
 }
 
+/* Botón reset */
 button {
   margin-top: 20px;
   padding: 8px 16px;

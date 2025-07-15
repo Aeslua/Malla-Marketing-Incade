@@ -18,21 +18,37 @@ function renderMalla() {
     div.innerHTML = `<h2>${cuatri.cuatrimestre}</h2>`;
 
     cuatri.materias.forEach(mat => {
+      const estado = estadoMaterias[mat.id] || "ninguno";
       const m = document.createElement("div");
       m.classList.add("materia");
-      m.textContent = mat.nombre;
 
-      const estado = estadoMaterias[mat.id] || "ninguno";
+      // Conserva color base para promocionales
+      if (mat.promocional) {
+        m.classList.add("promocional");
+      }
 
-      if (estado === "cursada") {
-        m.classList.add("cursada");
-      } else if (estado === "aprobada") {
-        m.classList.add("aprobada");
-      } else if (!mat.correlativas.every(req => estadoMaterias[req] === "aprobada")) {
+      // Aplica clase según estado para regulares
+      if (!mat.promocional) {
+        if (estado === "cursada") m.classList.add("cursada");
+        else if (estado === "aprobada") m.classList.add("aprobada");
+      }
+
+      // Si no tiene correlativas aprobadas y no tiene estado, bloquear
+      if (
+        estado === "ninguno" &&
+        !mat.correlativas.every(req => estadoMaterias[req] === "aprobada")
+      ) {
         m.classList.add("bloqueada");
       }
 
-      m.onclick = () => cambiarEstado(mat.id, mat.correlativas);
+      // Íconos según estado
+      let icono = "";
+      if (estado === "cursada") icono = " ⏺️";
+      else if (estado === "aprobada") icono = " ✅";
+
+      m.textContent = mat.nombre + icono;
+
+      m.onclick = () => cambiarEstado(mat.id, mat.correlativas, mat.promocional);
       div.appendChild(m);
     });
 
@@ -42,18 +58,18 @@ function renderMalla() {
   actualizarBarraProgreso();
 }
 
-function cambiarEstado(id, correlativas) {
+function cambiarEstado(id, correlativas, esPromocional) {
   let estado = estadoMaterias[id] || "ninguno";
 
   if (estado === "ninguno") {
-    // Solo dejar cursar si tiene correlativas aprobadas
+    // Verifica correlativas
     const puedeCursar = correlativas.every(req => estadoMaterias[req] === "aprobada");
     if (!puedeCursar) return;
     estadoMaterias[id] = "cursada";
   } else if (estado === "cursada") {
     estadoMaterias[id] = "aprobada";
   } else {
-    delete estadoMaterias[id];
+    delete estadoMaterias[id]; // vuelve a estado inicial
   }
 
   localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));

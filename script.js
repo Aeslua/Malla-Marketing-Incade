@@ -1,5 +1,5 @@
 let materias;
-let aprobadas = JSON.parse(localStorage.getItem("materiasAprobadas") || "[]");
+let estadoMaterias = JSON.parse(localStorage.getItem("estadoMaterias") || "{}");
 
 async function cargarMaterias() {
   const res = await fetch("materias.json");
@@ -20,58 +20,58 @@ function renderMalla() {
     cuatri.materias.forEach(mat => {
       const m = document.createElement("div");
       m.classList.add("materia");
-
-      // ⭐ Si es promocional, se aplica clase especial
-      if (mat.promocional) {
-        m.classList.add("promocional");
-      }
-
       m.textContent = mat.nombre;
 
-      // ✅ Si está aprobada
-      if (aprobadas.includes(mat.id)) {
+      const estado = estadoMaterias[mat.id] || "ninguno";
+
+      if (estado === "cursada") {
+        m.classList.add("cursada");
+      } else if (estado === "aprobada") {
         m.classList.add("aprobada");
-      }
-      // 🔒 Si está bloqueada por correlativas
-      else if (!mat.correlativas.every(req => aprobadas.includes(req))) {
+      } else if (!mat.correlativas.every(req => estadoMaterias[req] === "aprobada")) {
         m.classList.add("bloqueada");
       }
 
-      // Acciones al tocar
-      m.onclick = () => toggleMateria(mat.id);
-
+      m.onclick = () => cambiarEstado(mat.id, mat.correlativas);
       div.appendChild(m);
     });
 
     container.appendChild(div);
   });
 
-  actualizarBarraProgreso(); // 🔄 Actualiza el progreso visual
+  actualizarBarraProgreso();
 }
 
-function toggleMateria(id) {
-  if (aprobadas.includes(id)) {
-    aprobadas = aprobadas.filter(m => m !== id);
+function cambiarEstado(id, correlativas) {
+  let estado = estadoMaterias[id] || "ninguno";
+
+  if (estado === "ninguno") {
+    // Solo dejar cursar si tiene correlativas aprobadas
+    const puedeCursar = correlativas.every(req => estadoMaterias[req] === "aprobada");
+    if (!puedeCursar) return;
+    estadoMaterias[id] = "cursada";
+  } else if (estado === "cursada") {
+    estadoMaterias[id] = "aprobada";
   } else {
-    aprobadas.push(id);
+    delete estadoMaterias[id];
   }
-  localStorage.setItem("materiasAprobadas", JSON.stringify(aprobadas));
+
+  localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));
   renderMalla();
-  actualizarBarraProgreso();
 }
 
 function resetearProgreso() {
   if (confirm("¿Seguro que querés borrar tu progreso?")) {
-    aprobadas = [];
-    localStorage.removeItem("materiasAprobadas");
+    estadoMaterias = {};
+    localStorage.removeItem("estadoMaterias");
     renderMalla();
-    actualizarBarraProgreso();
   }
 }
 
 function actualizarBarraProgreso() {
-  const totalMaterias = materias.flatMap(c => c.materias).length;
-  const porcentaje = Math.round((aprobadas.length / totalMaterias) * 100);
+  const total = materias.flatMap(c => c.materias).length;
+  const completadas = Object.values(estadoMaterias).filter(e => e === "aprobada").length;
+  const porcentaje = Math.round((completadas / total) * 100);
   const barra = document.getElementById("progreso-interno");
   const texto = document.getElementById("progreso-texto");
 

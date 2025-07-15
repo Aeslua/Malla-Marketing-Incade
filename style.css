@@ -140,3 +140,7 @@ button:hover {
   color: #b94782;
   line-height: 1;
 }
+
+.progreso-text-group {
+  font-family: 'Segoe UI', sans-serif;
+}

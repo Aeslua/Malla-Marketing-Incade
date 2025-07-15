@@ -20,6 +20,9 @@ h1 {
 }
 
 .cuatrimestre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #ffebf5; /* tarjeta de cuatrimestre pastel */
   padding: 15px;
   border-radius: 12px;

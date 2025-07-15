@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Malla Curricular - Marketing INCADE</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Curricular Interactiva</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Tecnicatura en Marketing y Publicidad Digital</h1>
+  <h1>🌷Tecnicatura en Marketing y Publicidad Digital🌷</h1>
+
+  <!-- Barra de progreso -->
+  <div id="barra-progreso">
+    <div id="progreso-interno"></div>
+  </div>
+  <div id="progreso-texto"></div>
+
+  <!-- Contenedor de la malla -->
   <div id="malla-container"></div>
-  <button onclick="resetearProgreso()">🔄 Resetear progreso</button>
+
+  <!-- Botón de reinicio -->
+  <button onclick="resetearProgreso()">Reiniciar Progreso</button>
+
   <script src="script.js"></script>
 </body>
 </html>

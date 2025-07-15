@@ -1,99 +1,118 @@
-let materias;
-let estadoMaterias = JSON.parse(localStorage.getItem("estadoMaterias") || "{}");
+const contenedor = document.getElementById("contenedor");
+const progreso = document.getElementById("progreso");
+let materias = {};
 
-async function cargarMaterias() {
-  const res = await fetch("materias.json");
-  materias = await res.json();
-  renderMalla();
-  actualizarBarraProgreso();
-}
-
-function renderMalla() {
-  const container = document.getElementById("malla-container");
-  container.innerHTML = "";
-
-  materias.forEach(cuatri => {
-    const div = document.createElement("div");
-    div.classList.add("cuatrimestre");
-    div.innerHTML = `<h2>${cuatri.cuatrimestre}</h2>`;
-
-    cuatri.materias.forEach(mat => {
-      const estado = estadoMaterias[mat.id] || "ninguno";
-      const m = document.createElement("div");
-      m.classList.add("materia");
-
-      // Aplica clase de estado
-      if (estado === "cursada") m.classList.add("cursada");
-      else if (estado === "aprobada") m.classList.add("aprobada");
-
-      // Bloquea si no tiene correlativas aprobadas y aún no se cursó
-      if (
-        estado === "ninguno" &&
-        !mat.correlativas.every(req => estadoMaterias[req] === "aprobada")
-      ) {
-        m.classList.add("bloqueada");
-      }
-
-      // Define color base solo para estado inicial
-      if (estado === "ninguno") {
-        if (mat.promocional) {
-          m.classList.add("promocional");
-        } else {
-          m.classList.add("regular");
-        }
-      }
-
-      // Íconos según estado
-      let icono = "";
-      if (estado === "cursada") icono = " ⏺️";
-      else if (estado === "aprobada") icono = " ✅";
-
-      m.textContent = mat.nombre + icono;
-
-      m.onclick = () => cambiarEstado(mat.id, mat.correlativas);
-      div.appendChild(m);
-    });
-
-    container.appendChild(div);
+fetch("materias.json")
+  .then((response) => response.json())
+  .then((data) => {
+    materias = data;
+    renderizarMalla();
   });
 
-  actualizarBarraProgreso();
+function renderizarMalla() {
+  contenedor.innerHTML = "";
+
+  Object.entries(materias).forEach(([cuatrimestre, lista]) => {
+    const columna = document.createElement("div");
+    columna.className = "columna";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = cuatrimestre;
+    columna.appendChild(titulo);
+
+    lista.forEach((materia) => {
+      const boton = document.createElement("button");
+      boton.className = "materia";
+      boton.textContent = materia.nombre;
+      boton.dataset.codigo = materia.codigo;
+      boton.dataset.estado = "pendiente";
+
+      if (materia.promocional) {
+        boton.classList.add("promocional");
+      }
+
+      boton.addEventListener("click", () => cambiarEstado(boton, materia));
+      columna.appendChild(boton);
+    });
+
+    contenedor.appendChild(columna);
+  });
+
+  actualizarEstadosGuardados();
+  actualizarProgreso();
+  manejarCorrelativas();
 }
 
-function cambiarEstado(id, correlativas) {
-  let estado = estadoMaterias[id] || "ninguno";
+function cambiarEstado(boton, materia) {
+  const estado = boton.dataset.estado;
 
-  if (estado === "ninguno") {
-    const puedeCursar = correlativas.every(req => estadoMaterias[req] === "aprobada");
-    if (!puedeCursar) return;
-    estadoMaterias[id] = "cursada";
+  if (estado === "pendiente") {
+    boton.dataset.estado = "cursada";
+    boton.innerHTML = `⏺️ ${materia.nombre}`;
   } else if (estado === "cursada") {
-    estadoMaterias[id] = "aprobada";
+    boton.dataset.estado = "aprobada";
+    boton.innerHTML = `✅ ${materia.nombre}`;
   } else {
-    delete estadoMaterias[id]; // vuelve a inicio
+    boton.dataset.estado = "pendiente";
+    boton.innerHTML = materia.nombre;
   }
 
-  localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));
-  renderMalla();
+  guardarEstado(boton.dataset.codigo, boton.dataset.estado);
+  actualizarProgreso();
+  manejarCorrelativas();
 }
 
-function resetearProgreso() {
-  if (confirm("¿Seguro que querés borrar tu progreso?")) {
-    estadoMaterias = {};
-    localStorage.removeItem("estadoMaterias");
-    renderMalla();
-  }
+function guardarEstado(codigo, estado) {
+  let estados = JSON.parse(localStorage.getItem("estados")) || {};
+  estados[codigo] = estado;
+  localStorage.setItem("estados", JSON.stringify(estados));
 }
 
-function actualizarBarraProgreso() {
-  const total = materias.flatMap(c => c.materias).length;
-  const completadas = Object.values(estadoMaterias).filter(e => e === "aprobada").length;
-  const porcentaje = Math.round((completadas / total) * 100);
-  const barra = document.getElementById("progreso-interno");
-  const texto = document.getElementById("progreso-texto");
+function actualizarEstadosGuardados() {
+  const estados = JSON.parse(localStorage.getItem("estados")) || {};
+  document.querySelectorAll(".materia").forEach((boton) => {
+    const estado = estados[boton.dataset.codigo];
+    if (estado) {
+      boton.dataset.estado = estado;
 
-  barra.style.width = `${porcentaje}%`;
-  texto.textContent = `${porcentaje}% completado`;
+      if (estado === "cursada") {
+        boton.innerHTML = `⏺️ ${boton.textContent}`;
+      } else if (estado === "aprobada") {
+        boton.innerHTML = `✅ ${boton.textContent.replace("⏺️ ", "")}`;
+      }
+    }
+  });
 }
 
-cargarMaterias();
+function actualizarProgreso() {
+  const botones = document.querySelectorAll(".materia");
+  const total = botones.length;
+  const aprobadas = Array.from(botones).filter(b => b.dataset.estado === "aprobada").length;
+  const porcentaje = Math.round((aprobadas / total) * 100);
+  progreso.style.width = `${porcentaje}%`;
+  progreso.textContent = `${porcentaje}% completado`;
+}
+
+function manejarCorrelativas() {
+  const estados = JSON.parse(localStorage.getItem("estados")) || {};
+  document.querySelectorAll(".materia").forEach((boton) => {
+    boton.disabled = false;
+    boton.classList.remove("bloqueada");
+  });
+
+  Object.values(materias).flat().forEach((materia) => {
+    const boton = document.querySelector(`.materia[data-codigo='${materia.codigo}']`);
+
+    if (materia.correlativas) {
+      const { regular = [], aprobado = [] } = materia.correlativas;
+
+      const faltanRegular = regular.some((cod) => estados[cod] !== "cursada" && estados[cod] !== "aprobada");
+      const faltanAprobado = aprobado.some((cod) => estados[cod] !== "aprobada");
+
+      if (faltanRegular || faltanAprobado) {
+        boton.disabled = true;
+        boton.classList.add("bloqueada");
+      }
+    }
+  });
+}

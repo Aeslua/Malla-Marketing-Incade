@@ -18,37 +18,19 @@ function renderMalla() {
     div.innerHTML = `<h2>${cuatri.cuatrimestre}</h2>`;
 
     cuatri.materias.forEach(mat => {
-      const estado = estadoMaterias[mat.id] || "ninguno";
       const m = document.createElement("div");
       m.classList.add("materia");
+      m.textContent = mat.nombre;
 
-      // Aplica clase de estado
-      if (estado === "cursada") m.classList.add("cursada");
-      else if (estado === "aprobada") m.classList.add("aprobada");
+      const estado = estadoMaterias[mat.id] || "ninguno";
 
-      // Bloquea si no tiene correlativas aprobadas y aún no se cursó
-      if (
-        estado === "ninguno" &&
-        !mat.correlativas.every(req => estadoMaterias[req] === "aprobada")
-      ) {
+      if (estado === "cursada") {
+        m.classList.add("cursada");
+      } else if (estado === "aprobada") {
+        m.classList.add("aprobada");
+      } else if (!mat.correlativas.every(req => estadoMaterias[req] === "aprobada")) {
         m.classList.add("bloqueada");
       }
-
-      // Define color base solo para estado inicial
-      if (estado === "ninguno") {
-        if (mat.promocional) {
-          m.classList.add("promocional");
-        } else {
-          m.classList.add("regular");
-        }
-      }
-
-      // Íconos según estado
-      let icono = "";
-      if (estado === "cursada") icono = " ⏺️";
-      else if (estado === "aprobada") icono = " ✅";
-
-      m.textContent = mat.nombre + icono;
 
       m.onclick = () => cambiarEstado(mat.id, mat.correlativas);
       div.appendChild(m);
@@ -64,13 +46,14 @@ function cambiarEstado(id, correlativas) {
   let estado = estadoMaterias[id] || "ninguno";
 
   if (estado === "ninguno") {
+    // Solo dejar cursar si tiene correlativas aprobadas
     const puedeCursar = correlativas.every(req => estadoMaterias[req] === "aprobada");
     if (!puedeCursar) return;
     estadoMaterias[id] = "cursada";
   } else if (estado === "cursada") {
     estadoMaterias[id] = "aprobada";
   } else {
-    delete estadoMaterias[id]; // vuelve a inicio
+    delete estadoMaterias[id];
   }
 
   localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));

@@ -1,135 +1,211 @@
-{
-  "1er Cuatrimestre": {
-    "Álgebra": { "tipo": "promocional" },
-    "Principios de Administración": { "tipo": "promocional" },
-    "Psicología Social": { "tipo": "promocional" },
-    "Teoría de la Comunicación": { "tipo": "regular" },
-    "Inglés Técnico": { "tipo": "promocional" },
-    "Marketing I": { "tipo": "regular" }
+[
+  {
+    "nombre": "Álgebra",
+    "cuatrimestre": 0,
+    "promocional": true
   },
-  "2do Cuatrimestre": {
-    "Estrategias Digitales": {
-      "tipo": "promocional",
-      "requiereRegular": ["Álgebra"]
-    },
-    "Introducción a la Publicidad": {
-      "tipo": "regular",
-      "requiereRegular": ["Psicología Social"]
-    },
-    "Comportamiento del Consumidor": {
-      "tipo": "regular",
-      "requiereRegular": ["Psicología Social"]
-    },
-    "Microeconomía": {
-      "tipo": "promocional",
-      "requiereAprobada": ["Álgebra"]
-    },
-    "Política de Productos y Precios": {
-      "tipo": "regular",
-      "requiereRegular": ["Marketing I"]
-    },
-    "Briefing y Redacción Publicitaria": {
-      "tipo": "promocional",
-      "requiereRegular": ["Psicología Social"]
+  {
+    "nombre": "Principios de Administración",
+    "cuatrimestre": 0,
+    "promocional": true
+  },
+  {
+    "nombre": "Psicología Social",
+    "cuatrimestre": 0,
+    "promocional": true
+  },
+  {
+    "nombre": "Teoría de la Comunicación",
+    "cuatrimestre": 0
+  },
+  {
+    "nombre": "Inglés Técnico",
+    "cuatrimestre": 0,
+    "promocional": true
+  },
+  {
+    "nombre": "Marketing I",
+    "cuatrimestre": 0
+  },
+  {
+    "nombre": "Estrategias Digitales",
+    "cuatrimestre": 1,
+    "promocional": true
+  },
+  {
+    "nombre": "Introducción a la Publicidad",
+    "cuatrimestre": 1
+  },
+  {
+    "nombre": "Comportamiento del Consumidor",
+    "cuatrimestre": 1,
+    "correlativas": {
+      "aprobadas": ["Psicología Social"]
     }
   },
-  "3er Cuatrimestre": {
-    "Estadísticas Aplicadas": {
-      "tipo": "regular",
-      "requiereAprobada": ["Álgebra"]
-    },
-    "Técnicas de Promoción y Ventas": {
-      "tipo": "regular",
-      "requiereAprobada": ["Marketing I"]
-    },
-    "Marco Económico": {
-      "tipo": "regular",
-      "requiereRegular": ["Microeconomía"]
-    },
-    "Marketing Estratégico": {
-      "tipo": "regular",
-      "requiereRegular": ["Marketing I"]
-    },
-    "Análisis Financiero": {
-      "tipo": "promocional",
-      "requiereAprobada": ["Álgebra"]
-    },
-    "Comercio y Negocios Internacionales": {
-      "tipo": "promocional",
-      "requiereRegular": ["Microeconomía"]
+  {
+    "nombre": "Microeconomía",
+    "cuatrimestre": 1,
+    "promocional": true
+  },
+  {
+    "nombre": "Política de Productos y Precios",
+    "cuatrimestre": 1,
+    "correlativas": {
+      "aprobadas": ["Marketing I"]
     }
   },
-  "4to Cuatrimestre": {
-    "Comunicaciones Integradas de Marketing": {
-      "tipo": "regular",
-      "requiereRegular": ["Teoría de la Comunicación", "Marketing I"]
-    },
-    "Dirección de Ventas": {
-      "tipo": "regular",
-      "requiereRegular": ["Técnicas de Promoción y Ventas"]
-    },
-    "Investigación de Mercados": {
-      "tipo": "regular",
-      "requiereAprobada": ["Estadísticas Aplicadas"]
-    },
-    "Creatividad e Innovación": {
-      "tipo": "regular",
-      "requiereRegular": ["Introducción a la Publicidad"]
-    },
-    "Relaciones Públicas": {
-      "tipo": "promocional",
-      "requiereRegular": ["Psicología Social"]
-    },
-    "Herramientas Tecnológicas": {
-      "tipo": "promocional"
+  {
+    "nombre": "Briefing y Redacción Publicitaria",
+    "cuatrimestre": 1,
+    "promocional": true
+  },
+  {
+    "nombre": "Estadísticas Aplicadas",
+    "cuatrimestre": 2,
+    "correlativas": {
+      "aprobadas": ["Álgebra"]
     }
   },
-  "5to Cuatrimestre": {
-    "Taller Integrador de Marketing": {
-      "tipo": "regular",
-      "requiereRegular": ["Comunicaciones Integradas de Marketing"]
-    },
-    "Agencias de Publicidad": {
-      "tipo": "regular",
-      "requiereRegular": ["Introducción a la Publicidad"]
-    },
-    "Medios de Comunicación": {
-      "tipo": "promocional",
-      "requiereRegular": ["Comunicaciones Integradas de Marketing"]
-    },
-    "Canales de Distribución/Logística": {
-      "tipo": "regular",
-      "requiereRegular": ["Marketing I"]
-    },
-    "Principios de Diseño Gráfico": {
-      "tipo": "promocional"
-    },
-    "Diseño e Imagen de Marca - Branding": {
-      "tipo": "promocional"
+  {
+    "nombre": "Técnicas de Promoción y Ventas",
+    "cuatrimestre": 2,
+    "correlativas": {
+      "aprobadas": ["Marketing I"]
     }
   },
-  "6to Cuatrimestre": {
-    "Estrategias Publicitarias": {
-      "tipo": "regular",
-      "requiereRegular": ["Introducción a la Publicidad"]
-    },
-    "Ética y Deontología Profesional": {
-      "tipo": "promocional"
-    },
-    "Marketing de Servicios": {
-      "tipo": "promocional",
-      "requiereRegular": ["Marketing I"]
-    },
-    "Decisiones de Marketing": {
-      "tipo": "regular",
-      "requiereRegular": ["Comunicaciones Integradas de Marketing"]
-    },
-    "Evaluación de Proyectos": {
-      "tipo": "regular",
-      "requiereRegular": ["Estadísticas Aplicadas", "Álgebra"]
-    },
-    "Práctica Profesional": {
-      "tipo": "regular"
+  {
+    "nombre": "Marco Económico",
+    "cuatrimestre": 2,
+    "correlativas": {
+      "aprobadas": ["Microeconomía"]
     }
+  },
+  {
+    "nombre": "Marketing Estratégico",
+    "cuatrimestre": 2
+  },
+  {
+    "nombre": "Análisis Financiero",
+    "cuatrimestre": 2,
+    "promocional": true,
+    "correlativas": {
+      "aprobadas": ["Álgebra"]
+    }
+  },
+  {
+    "nombre": "Comercio y Negocios Internacionales",
+    "cuatrimestre": 2,
+    "promocional": true
+  },
+  {
+    "nombre": "Comunicaciones Integradas de Marketing",
+    "cuatrimestre": 3,
+    "correlativas": {
+      "aprobadas": ["Teoría de la Comunicación", "Marketing I"]
+    }
+  },
+  {
+    "nombre": "Dirección de Ventas",
+    "cuatrimestre": 3,
+    "correlativas": {
+      "aprobadas": ["Técnicas de Promoción y Ventas"]
+    }
+  },
+  {
+    "nombre": "Investigación de Mercados",
+    "cuatrimestre": 3,
+    "promocional": true,
+    "correlativas": {
+      "aprobadas": ["Estadísticas Aplicadas"]
+    }
+  },
+  {
+    "nombre": "Creatividad e Innovación",
+    "cuatrimestre": 3
+  },
+  {
+    "nombre": "Relaciones Públicas",
+    "cuatrimestre": 3,
+    "promocional": true
+  },
+  {
+    "nombre": "Herramientas Tecnológicas",
+    "cuatrimestre": 3,
+    "promocional": true
+  },
+  {
+    "nombre": "Taller Integrador de Marketing",
+    "cuatrimestre": 4,
+    "correlativas": {
+      "aprobadas": ["Comunicaciones Integradas de Marketing", "Teoría de la Comunicación"]
+    }
+  },
+  {
+    "nombre": "Agencias de Publicidad",
+    "cuatrimestre": 4,
+    "correlativas": {
+      "aprobadas": ["Introducción a la Publicidad"]
+    }
+  },
+  {
+    "nombre": "Medios de Comunicación",
+    "cuatrimestre": 4,
+    "promocional": true,
+    "correlativas": {
+      "aprobadas": ["Comunicaciones Integradas de Marketing"]
+    }
+  },
+  {
+    "nombre": "Canales de Distribución/Logística",
+    "cuatrimestre": 4,
+    "correlativas": {
+      "aprobadas": ["Marketing I"]
+    }
+  },
+  {
+    "nombre": "Principios de Diseño Gráfico",
+    "cuatrimestre": 4,
+    "promocional": true
+  },
+  {
+    "nombre": "Diseño e Imagen de Marca - Branding",
+    "cuatrimestre": 4,
+    "promocional": true
+  },
+  {
+    "nombre": "Estrategias Publicitarias",
+    "cuatrimestre": 5
+  },
+  {
+    "nombre": "Ética y Deontología Profesional",
+    "cuatrimestre": 5,
+    "promocional": true
+  },
+  {
+    "nombre": "Marketing de Servicios",
+    "cuatrimestre": 5,
+    "promocional": true,
+    "correlativas": {
+      "aprobadas": ["Marketing I"]
+    }
+  },
+  {
+    "nombre": "Decisiones de Marketing",
+    "cuatrimestre": 5,
+    "correlativas": {
+      "aprobadas": ["Comunicaciones Integradas de Marketing"]
+    }
+  },
+  {
+    "nombre": "Evaluación de Proyectos",
+    "cuatrimestre": 5,
+    "correlativas": {
+      "aprobadas": ["Estadísticas Aplicadas", "Álgebra"]
+    }
+  },
+  {
+    "nombre": "Práctica Profesional",
+    "cuatrimestre": 5
   }
-}
+]

@@ -1,8 +1,99 @@
-// ============================ // MATERIAS Y DATOS PRINCIPALES // ============================ const materias = [ { cuatrimestre: 1, nombre: "1er Cuatrimestre", materias: [ { nombre: "Álgebra", tipo: "promocional", codigo: "MYP-101" }, { nombre: "Marketing I", tipo: "regular", codigo: "MYP-102" }, { nombre: "Principios de Administración", tipo: "promocional", codigo: "MYP-103" }, { nombre: "Psicología Social", tipo: "promocional", codigo: "MYP-104" }, { nombre: "Teoría de la Comunicación", tipo: "regular", codigo: "MYP-105" }, { nombre: "Inglés Técnico", tipo: "promocional", codigo: "MYP-106" } ] }, { cuatrimestre: 2, nombre: "2do Cuatrimestre", materias: [ { nombre: "Estrategias Digitales", tipo: "promocional", correlativas: ["MYP-101", "MYP-104"] }, { nombre: "Introducción a la Publicidad", tipo: "regular", correlativas: ["MYP-103"] }, { nombre: "Comportamiento del Consumidor", tipo: "regular", correlativas: ["MYP-104"] }, { nombre: "Microeconomía", tipo: "promocional", correlativas: ["MYP-101"] }, { nombre: "Política de Productos y Precios", tipo: "regular", correlativas: ["MYP-102"] }, { nombre: "Briefing y Redacción Publicitaria", tipo: "promocional", correlativas: ["MYP-105"] } ] }, { cuatrimestre: 3, nombre: "3er Cuatrimestre", materias: [ { nombre: "Estadísticas Aplicadas", tipo: "regular", correlativas: ["MYP-101"] }, { nombre: "Técnicas de Promoción y Ventas", tipo: "regular", correlativas: ["MYP-102"] }, { nombre: "Marco Económico", tipo: "regular", correlativas: ["MYP-204"] }, { nombre: "Marketing Estratégico", tipo: "regular", correlativas: ["MYP-102"] }, { nombre: "Análisis Financiero", tipo: "promocional", correlativas: ["MYP-101"] }, { nombre: "Comercio y Negocios Internacionales", tipo: "promocional", correlativas: ["MYP-101"] } ] }, { cuatrimestre: 4, nombre: "4to Cuatrimestre", materias: [ { nombre: "Comunicaciones Integradas de Marketing", tipo: "regular", correlativas: ["MYP-105", "MYP-102"] }, { nombre: "Dirección de Ventas", tipo: "regular", correlativas: ["MYP-302"] }, { nombre: "Investigación de Mercados", tipo: "promocional", correlativas: ["MYP-301"] }, { nombre: "Creatividad e Innovación", tipo: "regular" }, { nombre: "Relaciones Públicas", tipo: "promocional" }, { nombre: "Herramientas Tecnológicas", tipo: "promocional" } ] }, { cuatrimestre: 5, nombre: "5to Cuatrimestre", materias: [ { nombre: "Taller Integrador de Marketing", tipo: "regular", correlativas: ["MYP-401"] }, { nombre: "Agencias de Publicidad", tipo: "regular", correlativas: ["MYP-202"] }, { nombre: "Medios de Comunicación", tipo: "promocional", correlativas: ["MYP-401"] }, { nombre: "Canales de Distribución/Logística", tipo: "regular", correlativas: ["MYP-205"] }, { nombre: "Principios de Diseño Gráfico", tipo: "promocional" }, { nombre: "Diseño e Imagen de Marca - Branding", tipo: "promocional" } ] }, { cuatrimestre: 6, nombre: "6to Cuatrimestre", materias: [ { nombre: "Estrategias Publicitarias", tipo: "regular", correlativas: ["MYP-202"] }, { nombre: "Ética y Deontología Profesional", tipo: "promocional" }, { nombre: "Marketing de Servicios", tipo: "promocional", correlativas: ["MYP-102"] }, { nombre: "Decisiones de Marketing", tipo: "regular", correlativas: ["MYP-401"] }, { nombre: "Evaluación de Proyectos", tipo: "regular", correlativas: ["MYP-301"] }, { nombre: "Práctica Profesional", tipo: "regular" } ] } ];
+let materias;
+let estadoMaterias = JSON.parse(localStorage.getItem("estadoMaterias") || "{}");
 
-// =============== // Código principal // ===============
+async function cargarMaterias() {
+  const res = await fetch("materias.json");
+  materias = await res.json();
+  renderMalla();
+  actualizarBarraProgreso();
+}
 
-// Tu lógica para generar tarjetas, aplicar colores, manejar clicks e iconos // debería venir aquí. Como ya la trabajamos antes y solo necesitabas que todo // esté unido, podés copiar este bloque arriba de tu código anterior y // usar "materias" directamente sin necesidad del JSON externo.
+function renderMalla() {
+  const container = document.getElementById("malla-container");
+  container.innerHTML = "";
 
-// Si necesitás que también incluya la parte del DOM y la barra de progreso, // decime y te lo agrego todo unido. Este script es solo la base con los datos // ya incrustados correctamente. ✅
+  materias.forEach(cuatri => {
+    const div = document.createElement("div");
+    div.classList.add("cuatrimestre");
+    div.innerHTML = `<h2>${cuatri.cuatrimestre}</h2>`;
 
+    cuatri.materias.forEach(mat => {
+      const estado = estadoMaterias[mat.id] || "ninguno";
+      const m = document.createElement("div");
+      m.classList.add("materia");
+
+      // Aplica clase de estado
+      if (estado === "cursada") m.classList.add("cursada");
+      else if (estado === "aprobada") m.classList.add("aprobada");
+
+      // Bloquea si no tiene correlativas aprobadas y aún no se cursó
+      if (
+        estado === "ninguno" &&
+        !mat.correlativas.every(req => estadoMaterias[req] === "aprobada")
+      ) {
+        m.classList.add("bloqueada");
+      }
+
+      // Define color base solo para estado inicial
+      if (estado === "ninguno") {
+        if (mat.promocional) {
+          m.classList.add("promocional");
+        } else {
+          m.classList.add("regular");
+        }
+      }
+
+      // Íconos según estado
+      let icono = "";
+      if (estado === "cursada") icono = " ⏺️";
+      else if (estado === "aprobada") icono = " ✅";
+
+      m.textContent = mat.nombre + icono;
+
+      m.onclick = () => cambiarEstado(mat.id, mat.correlativas);
+      div.appendChild(m);
+    });
+
+    container.appendChild(div);
+  });
+
+  actualizarBarraProgreso();
+}
+
+function cambiarEstado(id, correlativas) {
+  let estado = estadoMaterias[id] || "ninguno";
+
+  if (estado === "ninguno") {
+    const puedeCursar = correlativas.every(req => estadoMaterias[req] === "aprobada");
+    if (!puedeCursar) return;
+    estadoMaterias[id] = "cursada";
+  } else if (estado === "cursada") {
+    estadoMaterias[id] = "aprobada";
+  } else {
+    delete estadoMaterias[id]; // vuelve a inicio
+  }
+
+  localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));
+  renderMalla();
+}
+
+function resetearProgreso() {
+  if (confirm("¿Seguro que querés borrar tu progreso?")) {
+    estadoMaterias = {};
+    localStorage.removeItem("estadoMaterias");
+    renderMalla();
+  }
+}
+
+function actualizarBarraProgreso() {
+  const total = materias.flatMap(c => c.materias).length;
+  const completadas = Object.values(estadoMaterias).filter(e => e === "aprobada").length;
+  const porcentaje = Math.round((completadas / total) * 100);
+  const barra = document.getElementById("progreso-interno");
+  const texto = document.getElementById("progreso-texto");
+
+  barra.style.width = `${porcentaje}%`;
+  texto.textContent = `${porcentaje}% completado`;
+}
+
+cargarMaterias();

@@ -1,6 +1,6 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #ffe6f0;
+  background-color: #ffe6f0; /* fondo rosado pastel */
   margin: 0;
   padding: 20px;
   color: #333;
@@ -20,7 +20,7 @@ h1 {
 }
 
 .cuatrimestre {
-  background-color: #ffebf5;
+  background-color: #ffebf5; /* tarjeta de cuatrimestre pastel */
   padding: 15px;
   border-radius: 12px;
   width: 220px;
@@ -35,41 +35,52 @@ h1 {
   padding-bottom: 5px;
 }
 
+/* Apariencia general de materias */
 .materia {
   margin: 6px 0;
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
+  font-weight: 500;
+}
+
+/* Colores base (estado inicial) */
+.regular {
+  background-color: #fcd6e2; /* rosado claro */
   color: #000;
 }
 
-.regular {
-  background-color: #fcd6e2;
-}
-
 .promocional {
-  background-color: #ffc78e;
+  background-color: #ffc78e; /* naranja pastel */
+  color: #000;
 }
 
+/* Estado 1: cursada (amarillo) */
 .cursada {
   background-color: #fff1a3 !important;
+  color: #000;
 }
 
+/* Estado 2: aprobada (verde) */
 .aprobada {
   background-color: #b3f3b3 !important;
+  color: #000;
 }
 
+/* Materias bloqueadas (no se pueden hacer clic) */
 .bloqueada {
   background-color: #e0e0e0 !important;
   color: #aaa !important;
   pointer-events: none;
 }
 
+/* Efecto al pasar el mouse */
 .materia:hover {
   transform: scale(1.03);
 }
 
+/* Barra de progreso */
 #barra-progreso {
   margin: 20px auto;
   width: 60%;
@@ -93,6 +104,7 @@ h1 {
   color: #b94782;
 }
 
+/* Botón */
 button {
   margin-top: 20px;
   padding: 8px 16px;

@@ -1,29 +1,29 @@
 {
-  "1er Cuatrimestre": [
+  "1° Cuatrimestre": [
     { "nombre": "Álgebra", "codigo": "MYP-101", "promocional": true },
     { "nombre": "Principios de Administración", "codigo": "MYP-102", "promocional": true },
     { "nombre": "Psicología Social", "codigo": "MYP-103", "promocional": true },
-    { "nombre": "Teoría de la Comunicación", "codigo": "MYP-104", "promocional": false },
+    { "nombre": "Teorías de la Comunicación", "codigo": "MYP-104", "promocional": false },
     { "nombre": "Inglés Técnico", "codigo": "MYP-106", "promocional": true },
     { "nombre": "Marketing I", "codigo": "MYP-105", "promocional": false }
   ],
-  "2do Cuatrimestre": [
+  "2° Cuatrimestre": [
     { "nombre": "Estrategias Digitales", "codigo": "MYP-201", "promocional": true },
     { "nombre": "Introducción a la Publicidad", "codigo": "MYP-202", "promocional": false },
     { "nombre": "Comportamiento del Consumidor", "codigo": "MYP-203", "promocional": false, "correlativas": { "regular": ["MYP-103"] } },
-    { "nombre": "Microeconomía", "codigo": "MYP-204", "promocional": true },
+    { "nombre": "Micro Economía", "codigo": "MYP-204", "promocional": true },
     { "nombre": "Política de Productos y Precios", "codigo": "MYP-205", "promocional": false, "correlativas": { "regular": ["MYP-105"] } },
     { "nombre": "Briefing y Redacción Publicitaria", "codigo": "MYP-206", "promocional": true }
   ],
-  "3er Cuatrimestre": [
-    { "nombre": "Estadísticas Aplicadas a los Negocios", "codigo": "MYP-301", "promocional": false, "correlativas": { "regular": ["MYP-101"] } },
+  "3° Cuatrimestre": [
+    { "nombre": "Estadísticas aplicadas a los negocios", "codigo": "MYP-301", "promocional": false, "correlativas": { "regular": ["MYP-101"] } },
     { "nombre": "Técnicas de Promoción y Ventas", "codigo": "MYP-302", "promocional": false, "correlativas": { "regular": ["MYP-105"] } },
-    { "nombre": "Marco Económico", "codigo": "MYP-303", "promocional": false, "correlativas": { "regular": ["MYP-204"] } },
+    { "nombre": "Macro Economía", "codigo": "MYP-303", "promocional": false, "correlativas": { "regular": ["MYP-204"] } },
     { "nombre": "Marketing Estratégico", "codigo": "MYP-304", "promocional": false },
     { "nombre": "Análisis Financiero", "codigo": "MYP-305", "promocional": true, "correlativas": { "regular": ["MYP-101"] } },
     { "nombre": "Comercio y Negocios Internacionales", "codigo": "MYP-306", "promocional": true }
   ],
-  "4to Cuatrimestre": [
+  "4° Cuatrimestre": [
     { "nombre": "Comunicaciones Integradas de Marketing", "codigo": "MYP-401", "promocional": false, "correlativas": { "regular": ["MYP-104", "MYP-105"] } },
     { "nombre": "Dirección de Ventas", "codigo": "MYP-402", "promocional": false, "correlativas": { "regular": ["MYP-302"], "aprobado": ["MYP-105"] } },
     { "nombre": "Investigación de Mercados - Métodos y Técnicas de Investigación", "codigo": "MYP-403", "promocional": false, "correlativas": { "regular": ["MYP-301"], "aprobado": ["MYP-101"] } },
@@ -31,7 +31,7 @@
     { "nombre": "Relaciones Públicas", "codigo": "MYP-405", "promocional": true },
     { "nombre": "Herramientas Tecnológicas", "codigo": "MYP-406", "promocional": true }
   ],
-  "5to Cuatrimestre": [
+  "5° Cuatrimestre": [
     { "nombre": "Taller Integrador de Marketing", "codigo": "MYP-501", "promocional": false, "correlativas": { "regular": ["MYP-401"], "aprobado": ["MYP-105", "MYP-104"] } },
     { "nombre": "Agencias de Publicidad", "codigo": "MYP-502", "promocional": false, "correlativas": { "regular": ["MYP-202"] } },
     { "nombre": "Medios de Comunicación", "codigo": "MYP-503", "promocional": true, "correlativas": { "regular": ["MYP-401"], "aprobado": ["MYP-105", "MYP-104"] } },
@@ -39,7 +39,7 @@
     { "nombre": "Principios de Diseño Gráfico", "codigo": "MYP-505", "promocional": true },
     { "nombre": "Diseño e Imagen de Marca - Branding", "codigo": "MYP-506", "promocional": true }
   ],
-  "6to Cuatrimestre": [
+  "6° Cuatrimestre": [
     { "nombre": "Estrategias Publicitarias", "codigo": "MYP-601", "promocional": false, "correlativas": { "regular": ["MYP-202"] } },
     { "nombre": "Ética y Deontología Profesional", "codigo": "MYP-602", "promocional": true },
     { "nombre": "Marketing de Servicios", "codigo": "MYP-603", "promocional": true, "correlativas": { "regular": ["MYP-105"] } },

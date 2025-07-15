@@ -1,6 +1,6 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #ffe6f0; /* fondo general rosado */
+  background-color: #ffe6f0; /* fondo rosado */
   margin: 0;
   padding: 20px;
   color: #333;
@@ -36,39 +36,43 @@ h1 {
 }
 
 .materia {
-  background-color: #fcd6e2; /* color base para materias regulares */
   margin: 6px 0;
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
+  color: #000;
 }
 
-.materia:hover {
-  transform: scale(1.03);
+/* Estado inicial */
+.regular {
+  background-color: #fcd6e2; /* rosado claro */
 }
 
-/* Mantiene siempre el color naranja en promocionales */
 .promocional {
-  background-color: #ffc78e !important;
-  color: #000 !important;
+  background-color: #ffc78e; /* naranja claro */
 }
 
-/* Estado 1: Cursada (solo regulares) */
-.cursada:not(.promocional) {
+/* Estado 1: cursada */
+.cursada {
   background-color: #fff1a3 !important; /* amarillo suave */
 }
 
-/* Estado 2: Aprobada (solo regulares) */
-.aprobada:not(.promocional) {
-  background-color: #b3f3b3 !important; /* verde pastel */
+/* Estado 2: aprobada */
+.aprobada {
+  background-color: #b3f3b3 !important; /* verde suave */
 }
 
-/* Materia bloqueada por correlativas */
+/* Bloqueadas */
 .bloqueada {
   background-color: #e0e0e0 !important;
   color: #aaa !important;
   pointer-events: none;
+}
+
+/* Hover */
+.materia:hover {
+  transform: scale(1.03);
 }
 
 /* Barra de progreso */

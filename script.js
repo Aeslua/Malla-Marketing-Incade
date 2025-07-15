@@ -22,23 +22,25 @@ function renderMalla() {
       const m = document.createElement("div");
       m.classList.add("materia");
 
-      // Conserva color base para promocionales
-      if (mat.promocional) {
-        m.classList.add("promocional");
-      }
+      // Aplica clase de estado
+      if (estado === "cursada") m.classList.add("cursada");
+      else if (estado === "aprobada") m.classList.add("aprobada");
 
-      // Aplica clase según estado para regulares
-      if (!mat.promocional) {
-        if (estado === "cursada") m.classList.add("cursada");
-        else if (estado === "aprobada") m.classList.add("aprobada");
-      }
-
-      // Si no tiene correlativas aprobadas y no tiene estado, bloquear
+      // Bloquea si no tiene correlativas aprobadas y aún no se cursó
       if (
         estado === "ninguno" &&
         !mat.correlativas.every(req => estadoMaterias[req] === "aprobada")
       ) {
         m.classList.add("bloqueada");
+      }
+
+      // Define color base solo para estado inicial
+      if (estado === "ninguno") {
+        if (mat.promocional) {
+          m.classList.add("promocional");
+        } else {
+          m.classList.add("regular");
+        }
       }
 
       // Íconos según estado
@@ -48,7 +50,7 @@ function renderMalla() {
 
       m.textContent = mat.nombre + icono;
 
-      m.onclick = () => cambiarEstado(mat.id, mat.correlativas, mat.promocional);
+      m.onclick = () => cambiarEstado(mat.id, mat.correlativas);
       div.appendChild(m);
     });
 
@@ -58,18 +60,17 @@ function renderMalla() {
   actualizarBarraProgreso();
 }
 
-function cambiarEstado(id, correlativas, esPromocional) {
+function cambiarEstado(id, correlativas) {
   let estado = estadoMaterias[id] || "ninguno";
 
   if (estado === "ninguno") {
-    // Verifica correlativas
     const puedeCursar = correlativas.every(req => estadoMaterias[req] === "aprobada");
     if (!puedeCursar) return;
     estadoMaterias[id] = "cursada";
   } else if (estado === "cursada") {
     estadoMaterias[id] = "aprobada";
   } else {
-    delete estadoMaterias[id]; // vuelve a estado inicial
+    delete estadoMaterias[id]; // vuelve a inicio
   }
 
   localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));

@@ -127,7 +127,7 @@ button:hover {
 .progreso-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;  /* CAMBIO CLAVE: Alinea los textos por la línea base */
   gap: 8px;
   margin-top: 10px;
   margin-bottom: 5px;
@@ -138,4 +138,5 @@ button:hover {
   font-weight: bold;
   font-size: 14px;
   color: #b94782;
+  line-height: 1;
 }

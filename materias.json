@@ -1,6 +1,6 @@
 {
   "1° Cuatrimestre": [
-    { "nombre": "Álgebra", "codigo": "MYP-101", "promocional": true },
+    { "nombre": "Matemáticas", "codigo": "MYP-101", "promocional": true },
     { "nombre": "Principios de Administración", "codigo": "MYP-102", "promocional": true },
     { "nombre": "Psicología Social", "codigo": "MYP-103", "promocional": true },
     { "nombre": "Teorías de la Comunicación", "codigo": "MYP-104", "promocional": false },
@@ -14,6 +14,7 @@
     { "nombre": "Micro Economía", "codigo": "MYP-204", "promocional": true },
     { "nombre": "Política de Productos y Precios", "codigo": "MYP-205", "promocional": false, "correlativas": { "regular": ["MYP-105"] } },
     { "nombre": "Briefing y Redacción Publicitaria", "codigo": "MYP-206", "promocional": true }
+    { "nombre": "Emprendedorismo I", "codigo": "MYP-207", "promocional": false }
   ],
   "3° Cuatrimestre": [
     { "nombre": "Estadísticas aplicadas a los negocios", "codigo": "MYP-301", "promocional": false, "correlativas": { "regular": ["MYP-101"] } },
@@ -22,6 +23,7 @@
     { "nombre": "Marketing Estratégico", "codigo": "MYP-304", "promocional": false },
     { "nombre": "Análisis Financiero", "codigo": "MYP-305", "promocional": true, "correlativas": { "regular": ["MYP-101"] } },
     { "nombre": "Comercio y Negocios Internacionales", "codigo": "MYP-306", "promocional": true }
+    { "nombre": "Emprendedorismo II", "codigo": "MYP-307", "promocional": false }
   ],
   "4° Cuatrimestre": [
     { "nombre": "Comunicaciones Integradas de Marketing", "codigo": "MYP-401", "promocional": false, "correlativas": { "regular": ["MYP-104", "MYP-105"] } },
@@ -30,6 +32,7 @@
     { "nombre": "Creatividad e Innovación", "codigo": "MYP-404", "promocional": false },
     { "nombre": "Relaciones Públicas", "codigo": "MYP-405", "promocional": true },
     { "nombre": "Herramientas Tecnológicas", "codigo": "MYP-406", "promocional": true }
+    { "nombre": "Emprendedorismo III", "codigo": "MYP-407", "promocional": false }
   ],
   "5° Cuatrimestre": [
     { "nombre": "Taller Integrador de Marketing", "codigo": "MYP-501", "promocional": false, "correlativas": { "regular": ["MYP-401"], "aprobado": ["MYP-105", "MYP-104"] } },

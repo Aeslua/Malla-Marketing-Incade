@@ -13,8 +13,9 @@
     { "nombre": "Comportamiento del Consumidor", "codigo": "MYP-203", "promocional": false, "correlativas": { "regular": ["MYP-103"] } },
     { "nombre": "Micro Economía", "codigo": "MYP-204", "promocional": true },
     { "nombre": "Política de Productos y Precios", "codigo": "MYP-205", "promocional": false, "correlativas": { "regular": ["MYP-105"] } },
-    { "nombre": "Briefing y Redacción Publicitaria", "codigo": "MYP-206", "promocional": true },
-    { "nombre": "Emprendedorismo I", "codigo": "MYP-207", "promocional": false }
+    { "nombre": "Briefing", "codigo": "MYP-206", "promocional": true },
+    { "nombre": "Emprendedorismo I", "codigo": "MYP-207", "promocional": true },
+    { "nombre": "Redacción Publicitaria", "codigo": "MYP-208", "promocional": true }
   ],
   "3° Cuatrimestre": [
     { "nombre": "Estadísticas aplicadas a los negocios", "codigo": "MYP-301", "promocional": false, "correlativas": { "regular": ["MYP-101"] } },
@@ -23,7 +24,7 @@
     { "nombre": "Marketing Estratégico", "codigo": "MYP-304", "promocional": false },
     { "nombre": "Análisis Financiero", "codigo": "MYP-305", "promocional": true, "correlativas": { "regular": ["MYP-101"] } },
     { "nombre": "Comercio y Negocios Internacionales", "codigo": "MYP-306", "promocional": true },
-    { "nombre": "Emprendedorismo II", "codigo": "MYP-307", "promocional": false }
+    { "nombre": "Emprendedorismo II", "codigo": "MYP-307", "promocional": true, "correlativas": { "promocional": ["MYP-207"] } }
   ],
   "4° Cuatrimestre": [
     { "nombre": "Comunicaciones Integradas de Marketing", "codigo": "MYP-401", "promocional": false, "correlativas": { "regular": ["MYP-104", "MYP-105"] } },

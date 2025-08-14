@@ -24,7 +24,7 @@
     { "nombre": "Marketing Estratégico", "codigo": "MYP-304", "promocional": false },
     { "nombre": "Análisis Financiero", "codigo": "MYP-305", "promocional": true, "correlativas": { "regular": ["MYP-101"] } },
     { "nombre": "Comercio y Negocios Internacionales", "codigo": "MYP-306", "promocional": true },
-    { "nombre": "Emprendedorismo II", "codigo": "MYP-307", "promocional": true, "correlativas": { "promocional": ["MYP-207"] } }
+    { "nombre": "Emprendedorismo II", "codigo": "MYP-307", "promocional": true, "correlativas": { "promocional": ["MYP-207"], "cursado": ["MYP-207"] } }
   ],
   "4° Cuatrimestre": [
     { "nombre": "Comunicaciones Integradas de Marketing", "codigo": "MYP-401", "promocional": false, "correlativas": { "regular": ["MYP-104", "MYP-105"] } },

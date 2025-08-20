@@ -12,7 +12,7 @@
     { "nombre": "Introducción a la Publicidad", "codigo": "MYP-202", "promocional": false },
     { "nombre": "Comportamiento del Consumidor", "codigo": "MYP-203", "promocional": false, "correlativas": { "regular": ["MYP-103"] } },
     { "nombre": "Micro Economía", "codigo": "MYP-204", "promocional": true },
-    { "nombre": "Política de Productos y Precios", "codigo": "MYP-205", "promocional": false, "correlativas": { "regular": ["MYP-105"] } },
+    { "nombre": "Productos y Precios", "codigo": "MYP-205", "promocional": true, "correlativas": { "regular": ["MYP-105"] } },
     { "nombre": "Briefing y Redacción Publicitaria", "codigo": "MYP-206", "promocional": true },
     { "nombre": "Emprendedorismo I", "codigo": "MYP-207", "promocional": true }
   ],

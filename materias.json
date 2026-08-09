@@ -32,7 +32,7 @@
     { "nombre": "Creatividad e Innovación", "codigo": "MYP-404", "promocional": false },
     { "nombre": "Relaciones Públicas", "codigo": "MYP-405", "promocional": true },
     { "nombre": "Herramientas Tecnológicas", "codigo": "MYP-406", "promocional": true },
-    { "nombre": "Emprendedorismo III", "codigo": "MYP-407", "promocional": false }
+    { "nombre": "Emprendedorismo III", "codigo": "MYP-407", "promocional": true }
   ],
   "5° Cuatrimestre": [
     { "nombre": "Taller Integrador de Marketing", "codigo": "MYP-501", "promocional": false, "correlativas": { "regular": ["MYP-401"], "aprobado": ["MYP-105", "MYP-104"] } },

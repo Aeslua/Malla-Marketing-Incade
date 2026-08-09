@@ -101,10 +101,11 @@ function actualizarEstadosGuardados() {
         boton.classList.add("aprobada");
         boton.innerHTML = `✅ ${boton.dataset.nombre}`;
       } else {
-        if (boton.classList.contains("promocional") || boton.dataset.promocional === "true") {
-          boton.classList.add("promocional");
-        } else {
-          boton.classList.add("regular");
+        const materiaData = Object.values(materias).flat().find(m => m.codigo === boton.dataset.codigo);
+if (materiaData && materiaData.promocional) {
+  boton.classList.add("promocional");
+} else {
+  boton.classList.add("regular");
         }
         boton.innerHTML = boton.dataset.nombre;
       }

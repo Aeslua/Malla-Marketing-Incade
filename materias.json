@@ -31,7 +31,7 @@
     { "nombre": "Investigación de Mercados - Métodos y Técnicas de Investigación", "codigo": "MYP-403", "promocional": false, "correlativas": { "regular": ["MYP-301"], "aprobado": ["MYP-101"] } },
     { "nombre": "Creatividad e Innovación", "codigo": "MYP-404", "promocional": false },
     { "nombre": "Relaciones Públicas", "codigo": "MYP-405", "promocional": true },
-    { "nombre": "Herramientas Tecnológicas", "codigo": "MYP-406", "promocional": true },
+    { "nombre": "Herramientas Tecnológicas", "codigo": "MYP-406", "promocional": false },
     { "nombre": "Emprendedorismo III", "codigo": "MYP-407", "promocional": true }
   ],
   "5° Cuatrimestre": [
